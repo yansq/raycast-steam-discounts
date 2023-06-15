@@ -1,0 +1,47 @@
+{
+  "$schema": "https://www.raycast.com/schemas/extension.json",
+  "name": "steam-discounts",
+  "title": "Steam Discounts",
+  "description": "",
+  "icon": "command-icon.png",
+  "author": "yansq",
+  "license": "MIT",
+  "commands": [
+    {
+      "name": "index",
+      "title": "Show Wishlist",
+      "description": "Show games in your wishlist",
+      "mode": "view"
+    },
+    {
+      "name": "addGame",
+      "title": "Add Game To Wishlist",
+      "description": "Add game to wishlist",
+      "mode": "view"
+    }
+  ],
+  "dependencies": {
+    "@raycast/api": "^1.53.2",
+    "@raycast/utils": "^1.7.1",
+    "node-fetch": "^3.3.1",
+    "react": "^18.2.0",
+    "react-dom": "^18.2.0",
+    "swr": "^2.1.5"
+  },
+  "devDependencies": {
+    "@raycast/eslint-config": "1.0.5",
+    "@types/node": "18.8.3",
+    "@types/react": "^18.2.12",
+    "@types/react-dom": "^18.2.5",
+    "eslint": "^7.32.0",
+    "prettier": "^2.5.1",
+    "typescript": "^4.4.3"
+  },
+  "scripts": {
+    "build": "ray build -e dist",
+    "dev": "ray develop",
+    "fix-lint": "ray lint --fix",
+    "lint": "ray lint",
+    "publish": "npx @raycast/api@latest publish"
+  }
+}
