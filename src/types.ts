@@ -17,7 +17,7 @@ export type GameDataResponse = {
 export type GamesPriceResponse = Record<number, PriceOverview>;
 
 export type PriceOverview = {
-  success: boolean,
+  success: boolean;
   data: {
     price_overview: {
       currency: string;
@@ -28,7 +28,7 @@ export type PriceOverview = {
       final_formatted: string;
     };
   };
-}
+};
 
 export type GameData = {
   type: string;

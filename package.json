@@ -2,7 +2,7 @@
   "$schema": "https://www.raycast.com/schemas/extension.json",
   "name": "steam-discounts",
   "title": "Steam Discounts",
-  "description": "",
+  "description": "Getting game information on Steam, and tracing discounts.",
   "icon": "command-icon.png",
   "author": "yansq",
   "license": "MIT",

@@ -4,7 +4,7 @@ import { useGameDetail } from "../apis/api";
 
 const GameDetail = ({ appid }: { appid: number }) => {
   const { data: gameDetail, isError: error } = useGameDetail<GameData>({ appid });
-  const lightGrey = '#cccccc';
+  const lightGrey = "#cccccc";
   const markdown = gameDetail
     ? `
 ![Game header image](${gameDetail.header_image})
@@ -26,7 +26,10 @@ ${gameDetail.short_description}
               <>
                 <Detail.Metadata.Label title="Initial Price" text={gameDetail?.price_overview.initial_formatted} />
                 <Detail.Metadata.Label title="Current Price" text={gameDetail?.price_overview.final_formatted} />
-                <Detail.Metadata.Label title="Discount Percent" text={gameDetail?.price_overview.discount_percent + "%"} />
+                <Detail.Metadata.Label
+                  title="Discount Percent"
+                  text={gameDetail?.price_overview.discount_percent + "%"}
+                />
               </>
             ) : null}
             {gameDetail?.release_date?.date ? (
@@ -36,7 +39,9 @@ ${gameDetail.short_description}
               <Detail.Metadata.Link
                 title="Data"
                 text={
-                  gameDetail?.metacritic?.score ? `Metacritic: ${gameDetail?.metacritic?.score.toString()}` : "Metacritic"
+                  gameDetail?.metacritic?.score
+                    ? `Metacritic: ${gameDetail?.metacritic?.score.toString()}`
+                    : "Metacritic"
                 }
                 target={gameDetail.metacritic.url}
               />
@@ -84,7 +89,13 @@ ${gameDetail.short_description}
                 text="Steam Page"
               />
             ) : null}
-            {gameDetail ? <Detail.Metadata.Link title="" text="Steam Deck Support Info" target={"https://www.protondb.com/app/" + appid} /> : null}
+            {gameDetail ? (
+              <Detail.Metadata.Link
+                title=""
+                text="Steam Deck Support Info"
+                target={"https://www.protondb.com/app/" + appid}
+              />
+            ) : null}
           </Detail.Metadata>
         )
       }
@@ -93,4 +104,3 @@ ${gameDetail.short_description}
 };
 
 export default GameDetail;
-
