@@ -2,8 +2,8 @@
   "$schema": "https://www.raycast.com/schemas/extension.json",
   "name": "steam-discounts",
   "title": "Steam Discounts",
-  "description": "Getting game information on Steam, and tracing discounts.",
-  "icon": "command-icon.png",
+  "description": "Get games' information on Steam, and trace discounts.",
+  "icon": "steam-icon.png",
   "author": "yansq",
   "license": "MIT",
   "commands": [
@@ -43,5 +43,15 @@
     "fix-lint": "ray lint --fix",
     "lint": "ray lint",
     "publish": "npx @raycast/api@latest publish"
-  }
+  },
+  "preferences": [
+    {
+      "name": "countryCode",
+      "type": "textfield",
+      "required": true,
+      "title": "Country Code",
+      "description": "Country code of your Steam store, e.g. cn, us, etc.",
+      "placeholder": "Country code of your Steam store, e.g. cn, us, etc."
+    }
+  ]
 }

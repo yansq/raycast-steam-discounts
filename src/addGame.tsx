@@ -1,6 +1,6 @@
-import { List, ActionPanel, Action, Icon } from "@raycast/api";
+import { List, ActionPanel, Action, Icon, Toast, showToast } from "@raycast/api";
 import { useState } from "react";
-import { useGameId } from "./apis/api";
+import { useGameId } from "./apis/fetches";
 import { useWishList } from "./utils/useWishList";
 import GameDetail from "./components/GameDetail";
 
@@ -26,16 +26,19 @@ export default function Command() {
       {gameIds?.map((item) => (
         <List.Item
           key={item.appid}
-          title={item.name as string}
+          title={item.name}
           subtitle={item.appid?.toString()}
           actions={
             <ActionPanel>
-              <Action.Push icon={Icon.Sidebar} title="View Game Details" target={<GameDetail appid={item.appid} />} />
+              <Action.Push icon={Icon.Sidebar} title="View Game Details" target={<GameDetail item={item} />} />
               <Action
                 icon={Icon.Sidebar}
                 title="Add to Wishlist"
-                onAction={() => wishList.add(item)}
-                shortcut={{ modifiers: ["opt"], key: "enter" }}
+                onAction={() => {
+                  wishList.add(item);
+                  showToast({ title: "Added to Wishlist", style: Toast.Style.Success });
+                }}
+                shortcut={{ modifiers: ["opt"], key: "a" }}
               />
             </ActionPanel>
           }

@@ -1,6 +1,6 @@
 import { useCachedState } from "@raycast/utils";
 import { GameSimple, PriceOverview } from "../types";
-import { fetchGamesPrice } from "../apis/api";
+import { fetchGamesPrice } from "../apis/fetches";
 
 export const useWishList = () => {
   const [wishList, setWishList] = useCachedState("wishList", [] as GameSimple[]);
@@ -21,10 +21,13 @@ export const useWishList = () => {
       .filter((g) => !g.lastUpdated || g.lastUpdated !== new Date().toLocaleDateString())
       .map((g) => g.appid)
       .join(",");
+
+    if (!toUpdateIds) {
+      return;
+    }
     const pricesData = await fetchGamesPrice(toUpdateIds);
 
     for (const [appid, price] of Object.entries<PriceOverview>(pricesData)) {
-      console.log(JSON.stringify(price));
       setWishList(
         wishList.map((item) =>
           item.appid.toString() === appid

@@ -1,9 +1,12 @@
-import { Detail } from "@raycast/api";
-import { GameData } from "../types";
-import { useGameDetail } from "../apis/api";
+import { Action, ActionPanel, Detail, Icon, showToast, Toast } from "@raycast/api";
+import { GameData, GameSimple } from "../types";
+import { useGameDetail } from "../apis/fetches";
+import { useWishList } from "../utils/useWishList";
 
-const GameDetail = ({ appid }: { appid: number }) => {
+const GameDetail = ({ item }: { item: GameSimple }) => {
+  const appid = item.appid;
   const { data: gameDetail, isError: error } = useGameDetail<GameData>({ appid });
+  const wishList = useWishList();
   const lightGrey = "#cccccc";
   const markdown = gameDetail
     ? `
@@ -19,6 +22,29 @@ ${gameDetail.short_description}
       isLoading={!gameDetail}
       navigationTitle={gameDetail?.name}
       markdown={error ? error?.message : markdown}
+      actions={
+        <ActionPanel>
+          <Action
+            icon={Icon.Sidebar}
+            title="Add to Wishlist"
+            onAction={() => {
+              wishList.add(item);
+              showToast({ title: "Added to Wishlist", style: Toast.Style.Success });
+            }}
+            shortcut={{ modifiers: ["opt"], key: "a" }}
+          />
+          <Action
+            icon={Icon.Sidebar}
+            title="Remove From Wishlist"
+            style={Action.Style.Destructive}
+            onAction={() => {
+              wishList.remove(item);
+              showToast({ title: "Removed from Wishlist", style: Toast.Style.Success });
+            }}
+            shortcut={{ modifiers: ["opt"], key: "r" }}
+          />
+        </ActionPanel>
+      }
       metadata={
         error ? null : (
           <Detail.Metadata>

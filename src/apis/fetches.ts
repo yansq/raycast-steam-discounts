@@ -1,6 +1,9 @@
+import { getPreferenceValues } from "@raycast/api";
 import fetch from "node-fetch";
-import useSWR, { useSWRConfig } from "swr";
+import useSWR from "swr";
 import { GameSimple, GameDataResponse, GamesPriceResponse, GameData } from "../types";
+
+const countryCode = getPreferenceValues<Preferences>().countryCode;
 
 async function fetchGames(url: string) {
   const response = await fetch(url);
@@ -25,7 +28,7 @@ async function fetchGameData({ appid, url }: { appid: number; url: string }) {
 }
 
 export async function fetchGamesPrice(appids: string) {
-  const url = `https://store.steampowered.com/api/appdetails?appids=${appids}&cc=cn&filters=price_overview`;
+  const url = `https://store.steampowered.com/api/appdetails?appids=${appids}&cc=${countryCode}&filters=price_overview`;
   const response = await fetch(url);
 
   if (!response.ok) {
@@ -49,25 +52,17 @@ export const useGameId = ({ term = "", cacheKey = 0, execute = true }) => {
 };
 
 export const useGameDetail = <T>({ appid = 0, execute = true }) => {
-  const { cache } = useSWRConfig();
   const key = {
     appid,
-    // TODO config origion
-    url: `https://store.steampowered.com/api/appdetails?appids=${appid}&cc=cn`,
+    url: `https://store.steampowered.com/api/appdetails?appids=${appid}&cc=${countryCode}`,
   };
+
   const { data, error, isValidating } = useSWR<GameData | undefined>(execute && appid ? key : null, fetchGameData, {
     revalidateOnFocus: false,
     revalidateOnReconnect: false,
     refreshInterval: 600_000, // 10 minutes
     dedupingInterval: 600_000, // 10 minutes
   });
-
-  // Slightly hacky way to grab something from swr cache
-  // If swr changes their serialization implimentation, this will break (gracefully)
-  const cacheKey = `#url:"${key.url}",appid:${appid},`;
-  if (!data && cache.get(cacheKey) && !error) {
-    return { data: cache.get(cacheKey) as T };
-  }
 
   return {
     data: data as T,
