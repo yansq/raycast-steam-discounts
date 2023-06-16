@@ -1,7 +1,7 @@
 export type GameSimple = {
   appid: number;
   name: string;
-  currentPierce?: string;
+  currentPrice?: string;
   discount?: number;
   lowestPierce?: string;
   lastUpdated?: string;

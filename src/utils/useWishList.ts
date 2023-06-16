@@ -29,11 +29,11 @@ export const useWishList = () => {
 
     for (const [appid, price] of Object.entries<PriceOverview>(pricesData)) {
       setWishList(
-        wishList.map((item) =>
+        wishList.map((item) => 
           item.appid.toString() === appid
             ? {
                 ...item,
-                currentPierce: price.data.price_overview.final_formatted,
+                currentPrice: price.data.price_overview.final_formatted,
                 discount: price.data.price_overview.discount_percent,
                 lastUpdated: new Date().toLocaleDateString(),
               }

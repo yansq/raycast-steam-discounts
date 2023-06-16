@@ -18,7 +18,7 @@ export default function Command() {
           <List.Item
             key={index}
             title={item.name as string}
-            subtitle={item.currentPierce && item.discount ? item.currentPierce + "  " + item.discount + "%" : ""}
+            subtitle={item.currentPrice ? item.currentPrice + "  " + item.discount + "%" : ""}
             actions={
               <ActionPanel>
                 <Action.Push icon={Icon.Sidebar} title="View Game Details" target={<GameDetail item={item} />} />
