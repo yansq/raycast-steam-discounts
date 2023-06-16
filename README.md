@@ -14,5 +14,5 @@ Based on [https://github.com/KevinBatdorf/steam-raycast](https://github.com/Kevi
 - Make sure you have [Raycast](https://www.raycast.com/), [Node.js](https://nodejs.org/en) and [npm](https://www.npmjs.com/package/npm) installed first,
 - Clone this repo,
 - Run `npm i`,
-- Go to Raycast, run `Import Extension`, and select the folder.
+- Run `Import Extension` command in Raycast, and select the folder.
 
