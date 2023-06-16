@@ -1,6 +1,6 @@
 # <p align="center"> Steam Discounts</p>
 
-<p align="center">A raycast extension to get Steam game information and trace discounts.</p>
+<p align="center">A Raycast extension to get Steam game information and to trace discounts</p>
 
 Based on [https://github.com/KevinBatdorf/steam-raycast](https://github.com/KevinBatdorf/steam-raycast), thanks to [@KevinBatdorf](https://github.com/KevinBatdorf).
 
